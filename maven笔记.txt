@@ -1,0 +1,20 @@
+maven笔记
+专门为Java项目打造的管理和构建工具
+所有编译、打包生成的文件都放在target目录里
+一个Maven工程就是由groupId, artifactId, version作为唯一标识，在引用其他第三方库的时候，也是这3个变量确定
+classpath就是指WEB-INF/classes/这个目录的路径。需要声明的一点是，使用classpath:这种前缀，就只能代表一个文件。
+依赖管理：比如spring-boot-starter-web，需要引入其他二三十个依赖，手动添加管理很容易出错，使用Maven解决依赖管理就很方便
+依赖关系：Maven定义了4种依赖关系，compile(默认), test, runtime, provided
+compile:编译时需要用到该jar包， test:编译Test时需要用到该jar包(junit), runtime:编译时不需要，但运行时需要用到(mysql)，privided:编译时需要用到，但运行时由JDK或某个服务器提供(servlet-api,tomcat提供)
+只有以-SNAPSHOT结尾的版本号会被Maven视为开发版本，开发版本每次都会重复下载，这种SNAPSHOT版本只能用于内部私有的Maven repo，公开发布的版本不允许出现SNAPSHOT
+进入到pom.xml所在目录，执行mvn clean package，成功的话就在target目录下获得编译后自动打包的jar
+Maven的生命周期由一系列阶段(phase)构成，内置生命周期default，另一个常用的生命周期clean，所以mvn命令后面的参数是phase, Maven自动根据生命周期运行到指定的phase，指定多个phase, 例如mvn clean package, Maven先执行clean生命周期到clean这个phase, 再执行default生命周期到package这个phase
+常用的命令：mvn clean, mvn clean compile, mvn clean test, mvn clean package
+常用的phase : clean(清理), compile(编译), test(运行测试), package(打包)
+执行一个phase又会触发一个或多个goal, goal的命名总是abc:xyz这种形式，goal相当于class的method，它才是真正干活的
+通常情况下，总是执行phase默认绑定的goal，所以不必指定goal
+实际上，执行每个phase都是通过某个插件(plugin)来执行的
+Maven自带的标准插件无需声明
+maven中的父子项目，子项目之前可以互相引用，像引用其他jar包一样
+pom.xml中的profile可以让我们定义一系列的配置信息，然后指定其激活条件
+继承：父pom中加入dependencymanagement，子pom中使用parent指定父pom项目
