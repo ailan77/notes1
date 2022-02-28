@@ -1,0 +1,59 @@
+趋势投资系统项目笔记
+（原来模拟回测是一个业务功能！！！！哈哈哈哈，傻逼了，还以为是springcloud里的东西）
+index-codes-service : 展示指数代码数据的微服务，从redis获取数据
+index-data-service : 展示指数代码所对应的指数数据的微服务，从redis获取数据
+index-zuul-service : 网关，包含有负载均衡功能
+trend-trading-backtest-service : 从index-data-service获取数据
+将trend-trading-backtest-service加入index-zuul-service微服务配置中，这样可以直接通过访问网关来负载均衡访问此微服务
+trend-trading-backtest-view : 
+将trend-trading-backtest-view加入index-zuul-service微服务配置中
+在view.html中使用ajax访问网关中的index-codes-service，展示指数代码
+在view.html中增加展示指数代码对应的指数数据，并使用图表形式展示，使用ajax访问网关中的trend-trading-backtest-service
+切换指数功能：在选择指数的框上加上change监听事件和对应的处理
+服务链路追踪zipkin, brave.sampler.Sampler,在需要追踪的微服务启动类中增加Sampler的bean，调用的关系可通过zipkin展示
+index-config-server配置服务器：可以将微服务的配置保存在某一个地方，配置服务器从这个地方获取配置，各个微服务通过配置服务器获取配置，可以更方便的对各个微服务修改配置，使用rabbitmq对配置进行广播
+
+
+
+
+
+所用注解：
+@Configuration
+@ConfigurationProperties
+@Bean
+@RestController, @RequestMapping, @GetMapping, @ReqeustParam, @PathVariable
+@Service, @Component
+@CrossOrigin表示允许跨域
+@CacheConfig, @Cacheable, @CachePut, @CacheEvict
+@SpringBootApplication
+@EnableEurekaClient, @EnableDiscoveryClient
+@EnableZuulProxy
+@RequestBody用在参数上是什么作用呢
+@FeignClient
+@EnableConfigServer
+@Value
+@RefreshScope
+
+
+
+
+所用jar包：
+spring-boot-starter-data-redis
+spring-boot-starter-web
+spring-cloud-starter-netflix-eureka-client
+spring-cloud-starter-netflix-zuul
+spring-cloud-starter-openfeign
+spring-cloud-starter-netflix-hystrix
+spring-boot-starter-thymeleaf
+spring-cloud-starter-zipkin
+spring-cloud-config-server
+spring-cloud-start-config
+spring-boot-starter-actuator
+spring-cloud-starter-bus-amqp
+
+
+Zuul代理中整合了Ribbon来实现客户端负载均衡
+fegin其实就是整合了Ribbon和HYSxxxx断路器，而且调用起来比较优雅,直接用注解接口就会调用对应的服务接口了
+feigh 是一个微服务直接访问另一个微服务的时候用的方式。 而访问网关就是通过 http 协议的方式访问了，无论用什么语言都可以访问，与某种具体的技术就脱钩了
+RestTemplate方式和feign模式区别？是什么呢？Ribbon客户端，通过restTemplate访问其他微服务，feign可通过在接口上加注解@FeignClient(value="地址")访问其他微服务，访问的是在eureka中注册的服务名，@LoadBalanced开启Ribbon负载均衡，Feign默认实现了负载均衡
+axois是做ajax的
