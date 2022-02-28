@@ -1,0 +1,22 @@
+git笔记
+现在github上拉取一个项目到eclipse中
+在github上创建项目，用eclipse把本地项目提交到自己的github上去
+
+idea中设置git
+
+git本地有三个工作区域：工作目录(working directory)，暂存区(stage/index)，资源库(repository/git directory)
+远程git仓库(remote directory)
+git的工作流程一般：在工作目录中添加、修改文件；将需要进行版本管理的文件放入暂存区域；将暂存区域的文件提交到git仓库。
+git管理的文件有三种状态：已修改(modified)，已暂存(staged)，已提交(commited)
+workspace(工作区)的文件add (-u)到index, index的commit到local repository, push到remote repository, workspace的commit -a直接到local repository
+日常6个命令：add, commit, push, pull, fetch/clone, checkout
+文件的四种状态：Untracked, Unmodify, Modified, Staged
+.gitignore文件，在其中标记哪些需要被忽略的文件，有几个标记规则需要看
+各个分支互不影响
+git add可以告诉Git，文件冲突已解决
+git log, git blame可以指定文件
+Git标签：git tag -a v1.0, -a表示创建一个带注解的标签
+解决合并冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交
+git stash保存当前工作现场， git stash apply, git stash drop, git stash pop, git stash list
+git cherry-pick xxxx复制一个特定的提交到当前分支，比如在master上修改了bug, 复制这个提交到dev分支上
+多人协作：如果别人在准备push的分支上提交了，就需要先pull，如果再次push有冲突，需要在本地先解决冲突，再次add，然后push
