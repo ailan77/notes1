@@ -29,7 +29,7 @@ index-config-server配置服务器：可以将微服务的配置保存在某一�
 @EnableEurekaClient, @EnableDiscoveryClient
 @EnableZuulProxy
 @RequestBody用在参数上是什么作用呢
-@FeignClient
+@FeignClient, @EnableFeignClients
 @EnableConfigServer
 @Value
 @RefreshScope

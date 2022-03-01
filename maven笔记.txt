@@ -18,3 +18,4 @@ Maven自带的标准插件无需声明
 maven中的父子项目，子项目之前可以互相引用，像引用其他jar包一样
 pom.xml中的profile可以让我们定义一系列的配置信息，然后指定其激活条件
 继承：父pom中加入dependencymanagement，子pom中使用parent指定父pom项目
+mvn install打包springboot项目成jar
