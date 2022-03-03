@@ -1,0 +1,45 @@
+2022-03-01
+springboot打包jar,war方式
+springboot支持jsp
+
+springcloud
+product-data-service 注册数据的微服务
+product-view-service-ribbon 视图的微服务，使用ribbon进行微服务之间的调用，controller调用service, service调用ProductClintRibbon中使用restTemplate访问product-data-service的controller的/products
+@FeignClient的path参数：定义当前FeignClient访问接口的统一前缀，比如接口地址是/user/get，如果定义了前缀是user，那么具体方法上的路径只需要写/get即可。value和name是一样的，在@FeignClient源码中，两个互为别名。
+@Resource的作用相当于@Autowired, @Resource默认byName, @Autowired默认byType
+永久代/元空间：存储已被虚拟机加载的类信息，常量，静态变量，即时编译器编译之后的代码等。
+虚拟机栈：局部变量表主要存放编译器可知的各种数据类型，对象引用；操作数栈，动态链接，方法出口信息等。
+事务的隔离级别：读取未提交，读取已提交，可重复读，可串行化
+并发事务带来的问题：脏读，幻读，不可重复读，丢失修改
+
+2022-03-02
+dsm-xiaodi-interface
+只有小嘀APP上的功能的所需接口，通过url方式调用接口，返回json数据给手机端
+所用框架：ibatis-2.x, struts2, spring, log4j, slf4j
+安全：SSL
+springboot网购平台后台管理系统：onlineShoppingBackstageManageSystem
+idea spring maven-quickstart
+新建了一个maven quickstart工程，在pom.xml中加入了spring-boot-starter-web
+pojo : Category,id,name
+mapper : Category.xml, CategoryMapper
+Controller : CategoryController
+spring, spring mvc, mybatis的xml方式, springboot, maven
+springboot : 跨域问题，全局异常处理
+springboot junit : 在类上加@RunWith(SpringRunner.class), @SpringBootTest(classes=Application.clss), 在方法上加@Test,然后run as junit test, 可以使用自动装配功能等
+创建springboot项目，一般两种方式：使用maven或者spring initailizr
+springboot将日常企业应用研发中的各种场景都抽取出来，做成一个个的starter，starter中整合了该场景下各种可能用到的依赖，用户只需要在maven中引入starter依赖，springboot就能自动扫描到要加载的信息并启动相应的默认配置
+spring-boot-starter-web是所有springboot项目的父级依赖，它被成为springboot的版本仲裁中心，可以对项目内的部分常用依赖进行统一管理
+springboot项目可以通过继承spring-boot-starter-parent来获得一些合理的默认配置，主要提供了以下特性：默认JDK版本，默认字符集，依赖管理功能，资源管理，默认插件配置，识别application.properties/yml类型的配置文件
+springboot默认使用application.properties/yml的全局配置文件，文件名是固定的
+YAML以.yml或.yaml结尾
+springboot配置绑定：把配置文件中的值与javabean中对应的属性值进行绑定，两种方式：@ConfigurationProperties, @Value
+@ConfigurationProperties告诉springboot将笨类中的所有属性和配置文件中的相关配置进行绑定
+想要使用@ConfigurationProperties，首先要保证该JavaBean对象在IoC容器中，所以需要用到@Component注解来将组件添加到容器中。
+当只需要读取配置文件中的某一个配置时，通过@Value获取。
+@Configuration注解定义配置类，替换spring的配置文件，比如定义bean的配置文件，然后在方法上添加@Bean，这些方法会被AnnotationConfigApplicationContext或者AnnotationConfigWebApplicationContext类扫描，构建bean定义（相当于spring配置文件中的<bean/>标签）
+springboot自动配置基于Spring Factories机制，读取spring.factories中的xxxAutoCofiguration实例化并作为组件加入到容器中。
+@SpringBootApplication是一个组合元注解，主要包含@SpringBootConfiguration和@EnableAutoConfiguration，后面一个是SpringBoot自动化配置的核心所在。
+springboot选用slf4j+logback搭建日志系统
+resources.static静态文件
+Spring Cloud 本身并不是一个拿来即可用的框架，它是一套微服务规范，这套规范共有两代实现
+redis准备数据类型，缓存问题就行
