@@ -1,0 +1,14 @@
+nod_js笔记
+可以在服务端运行的javascript
+可以把node.js简单的看成javascirpt写的tomcat
+node.js的优势：
+	node.js上的应用可以使用javascript开发，这样方便前端人员
+	node.js的I/O操作时非阻塞式的，比起tomcat这种阻塞式的更有优势
+text/plain的意思是将文件设置为纯文本的形式，浏览器在获取到这种文件时并不会对其进行处理
+在node.js中，所谓的模块，就是别人写的 js
+在server.js 同一个目录下创建 how2j.js，定义了两个函数，到目前为止 how2j.js 有两个函数了。 但是，这两个函数并不能通过外部调用，除非通过 exports 指定如何去调用他们
+允许外部通过 hi() 这个函数名称调用 sayHello() 这个函数exports.hi = sayHello;
+允许外部通过 service() 同名调用exports.service = service;
+通过 ./how2j 来加载这个模块。 记得，比如加上 ./ ,否则会到 node安装目录下去寻找var how2j = require('./how2j');
+how2j.hi();调用 hi() 函数，间接地就调用了how2j.js 里的 sayHello()函数
+var server = http.createServer(how2j.service);基于how2j.service() 函数创建服务

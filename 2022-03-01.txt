@@ -43,3 +43,12 @@ springboot选用slf4j+logback搭建日志系统
 resources.static静态文件
 Spring Cloud 本身并不是一个拿来即可用的框架，它是一套微服务规范，这套规范共有两代实现
 redis准备数据类型，缓存问题就行
+
+2022-03-03
+dsm-base-web使用HttpURLConnection(Http请求)调用dsm-push-server, 把消息发送(推送)到dsm-push-server中	
+dsm-push-server中使用websocket推送消息PushToH5Socket.java。往dsm-base-web中推送消息。
+dsm-base-web使用websocket与dsm-push-server建立长连接，然后dsm-push-server持续向dsm-base-web推送消息
+
+2022-03-04
+pushlet : 开源的comet框架，数据从server端的java对象直接推送(push)到客户端浏览的(动态)HTML页面，而无需任何Java applet或插件。使用了观察者模式。
+HttpURLConnection是Java提供的发起HTTP请求的基础类库，提供了HTTP请求的基本能力
